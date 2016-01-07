@@ -57,7 +57,7 @@ function switchRows(event) {
     var secondValues = event.target.parentNode.querySelector('.inputs').children;
     var firstValues = document.getElementById(ROW_CLICKED).querySelector('.inputs').children;
     var temp = [];
-    
+
     firstValues.forEach( function(element, i) {
       temp.push(element.value);
       element.value = secondValues[i].value;
@@ -65,9 +65,9 @@ function switchRows(event) {
     secondValues.forEach( function(element, i) {
       element.value = temp[i];
     });
-    
+
     document.getElementById(ROW_CLICKED).querySelector('.switch').setAttribute('class', 'switch');
-    
+
     clearAllButtons();
   }
 }
@@ -94,7 +94,7 @@ function multiplyRow(event) {
   activateButton(event.target);
   var input = document.getElementById('multiplier');
   showMultipleForm('multiply(' + event.target.parentNode.id + ');');
-  
+
   document.getElementById('multipleOfRow').setAttribute('style', 'display: auto;');
   input.focus();
 }
@@ -102,7 +102,7 @@ function multiplyRow(event) {
 function showMultipleForm(input) {
   console.log('derp');
   document.getElementById('multipleForm').setAttribute('style', 'display: auto;');
-  
+
   document.getElementById('multipleForm').setAttribute('action', 'javascript:' + input);
 }
 
@@ -134,10 +134,10 @@ function fractionMultiply(one, two) {
   if (String(one).indexOf('/') === -1 && String(two).indexOf('/') === -1) {
     return Number(one) * Number(two);
   }
-  
+
   var oneS = [one];
   var twoS = [two];
-  
+
   if (String(one).indexOf('/') !== -1) {
     oneS = one.split('/');
     if (oneS.length > 2) {
@@ -160,7 +160,7 @@ function fractionMultiply(one, two) {
       return NaN;
     }
   }
-  
+
   if (twoS.length === 2 && oneS.length === 2) {
     return oneS[0]*twoS[0]+'/'+oneS[1]*twoS[1];
   }
@@ -199,11 +199,11 @@ function reduce(input) {
   gcd = gcd(numerator,denominator);
   return [numerator/gcd, denominator/gcd];
   }
-  
+
   if (String(input).indexOf('/') === -1) {
     return input;
   }
-  
+
   var split = input.split('/');
   if (isNaN(Number(split[0])) || isNaN(Number(split[1]))) {
     console.warn('NaN');
@@ -226,10 +226,10 @@ function fractionAdd(one, two) {
   if (String(one).indexOf('/') === -1 && String(two).indexOf('/') === -1) {
     return Number(one) + Number(two);
   }
-  
+
   var oneS = [one];
   var twoS = [two];
-  
+
   if (String(one).indexOf('/') !== -1) {
     oneS = one.split('/');
     if (oneS.length > 2) {
@@ -252,7 +252,7 @@ function fractionAdd(one, two) {
       return NaN;
     }
   }
-  
+
   if (twoS.length === 2 && oneS.length === 2) {
     return addTwoFractions(oneS, twoS);
   }
@@ -281,7 +281,7 @@ function fractionAdd(one, two) {
     console.warn('NaN');
     return NaN;
   }
-  
+
 }
 
 // return a string
@@ -297,7 +297,7 @@ function addTwoFractions(one, two) {
 }
   var d = lcm(one[1], two[1]);
   var n = one[0]*(d/one[1])+two[0]*(d/two[1]);
-  
+
   return n+'/'+d;
 }
 
@@ -309,7 +309,7 @@ function addThisRow(event) {
     showMultipleForm('');
     document.getElementById('go').setAttribute('style', 'display: none;');
     document.getElementById('multipleOfRowAdd').removeAttribute('style');
-    
+
     input.focus();
     return ADD_CLICKED;
   }
@@ -318,12 +318,12 @@ function addThisRow(event) {
     var factor = document.getElementById('multiplier').value;
     var final = document.getElementById(event.target.parentNode.id).querySelector('.inputs').children;
     var temp = [];
-    
+
     if (factor === '') {
       console.warn('blank input');
       factor = 1;
     }
-    
+
     inputs.forEach( function(element) {
       temp.push(myMultiply(element.value, factor));
     });
@@ -331,7 +331,7 @@ function addThisRow(event) {
     final.forEach( function(element, i) {
       element.value = myAdd(element.value, temp[i]);
     });
-    
+
     document.getElementById('go').removeAttribute('style');
     clearAllButtons();
   }
